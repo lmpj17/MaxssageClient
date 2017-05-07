@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="icon-fonts/elusive-icons-2.0.0/css/elusive-icons.css">
+        <link rel="stylesheet" type="text/css" href="icon-fonts/font-awesome-4.3.0/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="galleria/galleria.classic.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="media_button_bar/css/media_button_bar.css">
+        <meta charset="UTF-8">
+        <title>Blank App Designer Cordova Web App Project Template</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }f
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script src="cordova.js" id="xdkJScordova_"></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/db-ajax.js"></script>
+        <script src="js/dates.js"></script>
+        <script src="js/card.js"></script>
+        <script src="js/calc-distance.js"></script>
+        <script src="js/alert.js"></script>
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script type="text/javascript">
+            Stripe.setPublishableKey('pk_test_kq4j7YupY8OkUnTMPH3JOWZx');
+        </script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-1.3.6.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria.classic.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-startup.js"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="xdk/ad/bs_subpage.js"></script>
+        <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+        <script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="application/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Loading jQuery UI JS -->
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+               $('#datepicker').datepicker({
+                changeMonth: true,// This option allow user to change month on top bar
+                changeYear:true// This option allow user to change year on top bar of date picker
+               });
+              });
+        </script>
+
+        <script type="application/javascript" src="sidebar/js/hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/jquery.hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/swipe-hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
+
+        <script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
+    </head>
+
+    <body>
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+        <div class="upage font-c bgpgini" id="mainpage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_63 front-w header-sz" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_5_89">
+
+                    <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_1 footer-sz" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_2 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_3 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btpglogin"><i class="el el-key button-icon-left" data-position="left"></i>Login</button>
+                            <button class="btn widget uib_w_5 btback btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btpgsignup"><i class="glyphicon glyphicon-user button-icon-left" data-position="left"></i>Signup</button>
+                            <button class="btn widget uib_w_5 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btexit"><i class="fa fa-sign-out button-icon-left" data-position="left"></i>Exit</button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="appointment">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_57" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_6_20">
+                    <div class="tarea widget uib_w_82 d-margins" data-uib="media/text" data-ver="0" name="uib_w_82" id="message-app1">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="table-thing widget uib_w_64 d-margins text-input input-font-18px input-round-corner input-text" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="datepicker">Date:</label>
+                        <input class="wide-control form-control default" type="text" id="datepicker">
+                    </div>
+
+                    <div class="table-thing widget uib_w_65 d-margins input-font-18px input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Time</label>
+                        <select class="wide-control form-control default input-lg" style="font-size: 18pt;" id="app-time">
+                            <option>6:00am</option>
+                            <option>6:30am</option>
+                            <option>7:00am</option>
+                            <option>7:30am</option>
+                            <option>8:00am</option>
+                            <option>8:30am</option>
+                            <option>9:00am</option>
+                            <option>9:30am</option>
+                            <option>10:00am</option>
+                            <option>10:30am</option>
+                            <option>11:00am</option>
+                            <option>11:30am</option>
+                            <option>12:00am</option>
+                            <option>0:30pm</option>
+                            <option>1:00pm</option>
+                            <option>1:30pm</option>
+                            <option>2:00pm</option>
+                            <option>2:30pm</option>
+                            <option>3:00pm</option>
+                            <option>3:30pm</option>
+                            <option>4:00pm</option>
+                            <option>4:30pm</option>
+                            <option>5:00pm</option>
+                            <option>5:30pm</option>
+                            <option>6:00pm</option>
+                            <option>6:30pm</option>
+                            <option>7:00pm</option>
+                            <option>7:30pm</option>
+                            <option>8:00pm</option>
+                            <option>8:30pm</option>
+                            <option>9:00pm</option>
+                            <option>9:30pm</option>
+                        </select>
+                    </div>
+                    <div class="table-thing widget uib_w_171 d-margins input-font-18px text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="app-address">Address</label>
+                        <input class="wide-control form-control default input-text" type="text" id="app-address">
+                    </div>
+                    <div class="table-thing widget uib_w_174 d-margins input-round-corner text-input input-font-18px" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                        <label class="narrow-control label-top-left">Comments</label>
+                        <textarea rows="2" class="wide-control form-control" wrap="soft" id="app-comments"></textarea>
+                    </div>
+                    <div class="grid grid-pad urow uib_row_5 row-height-5" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_5 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_58" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_59 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_60 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbackapp"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_62 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btappcontinue">Continue <i class="el el-arrow-right button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="pg-services" onload="listServices();">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_43" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col" id="page_7_55">
+                    <div class="tarea widget uib_w_56 d-margins font-c" data-uib="media/text" data-ver="0" name="uib_w_56" id="msgListServ">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p><strong>Service List</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="list-group widget uib_w_66 d-margins" data-uib="twitter%20bootstrap/list_group" data-ver="1">
+                        <a class="list-group-item allow-badge widget uib_w_67" data-uib="twitter%20bootstrap/list_item" data-ver="1" id="listServ">
+
+                            <p class="list-group-item-text">List item</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_44" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_68 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_69 bt-3width btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbookings"><i class="glyphicon glyphicon-th-list button-icon-left" data-position="left"></i>Bookings</button>
+                            <button class="btn widget uib_w_71 bt-3width btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btload-serv"><i class="fa fa-refresh button-icon-left" data-position="left"></i>Refresh</button>
+                            <button class="btn widget uib_w_71 bt-3width btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmenu"><i class="fa fa-navicon button-icon-left" data-position="left"></i>Menu</button>
+
+                        </div>
+
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="inner-element uib_w_132 uib_sidebar leftbar bar-bg thumb-bg bar-gutter" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'overlap', 'v':200, 'side':'left', 'dur':200}" id="menu">
+                    <div class="sidebar-content content-area vertical-col">
+
+                        <button class="btn widget uib_w_133 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btviewbookingsside"><i class="glyphicon glyphicon-align-justify button-icon-left" data-position="left"></i>View Bookings</button>
+                        <button class="btn widget uib_w_134 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btviewprofile"><i class="glyphicon glyphicon-user button-icon-left" data-position="left"></i>View Profile</button>
+                        <button class="btn widget uib_w_135 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btcontact"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>Contact Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="signup2">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_26" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_8_58">
+                    <div class="tarea widget uib_w_32 d-margins msg-text" data-uib="media/text" data-ver="0" name="uib_w_32" id="message-signup-2">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="table-thing widget uib_w_33 d-margins input-text text-input lb-text input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="name">Name:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="First and Last Name" id="name">
+                    </div>
+                    <div class="table-thing widget uib_w_34 d-margins lb-text input-text text-input input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="address">Address:</label>
+                        <input class="wide-control form-control default input-text" type="text" id="address" placeholder="Street, Building, City,State">
+                    </div>
+                    <div class="table-thing widget uib_w_37 d-margins lb-text font-c input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Gender:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="gender">
+                            <option>Female</option>
+                            <option>Male</option>
+                        </select>
+                    </div>
+                    <div class="table-thing widget uib_w_35 d-margins lb-text input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Weight:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="weight">
+                            <option>0-100lb</option>
+                            <option>100-150lb</option>
+                            <option>150-200lb</option>
+                            <option>200-300lb</option>
+                            <option>300lb+</option>
+                        </select>
+                    </div>
+                    <div class="table-thing widget uib_w_36 d-margins lb-text input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Height:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="height">
+                            <option>less than 6'</option>
+                            <option>more than 6'</option>
+                        </select>
+                    </div>
+
+                    <div class="table-thing widget uib_w_38 d-margins lb-text input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Age:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="age">
+                            <option>5-15</option>
+                            <option>15-20</option>
+                            <option>20-30</option>
+                            <option>30-40</option>
+                            <option>40-50</option>
+                            <option>50-60</option>
+                            <option>60-70</option>
+                            <option>70-80</option>
+                            <option>80-90</option>
+                            <option>90+</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-pad urow uib_row_6 row-height-6" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_6 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_27" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_28 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_29 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="back-signup-2"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_31 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="continue-signup-2">Continue <i class="glyphicon glyphicon-arrow-right button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="login-form">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_12 header-sz" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col" id="page_9_77">
+
+                    <div class="tarea widget uib_w_15 d-margins msg-text" data-uib="media/text" data-ver="0" name="uib_w_15" id="message-login">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+
+                    <div class="table-thing widget uib_w_13 d-margins lb-text text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="email">Email:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="Enter e-mail" id="email">
+                    </div>
+                    <div class="table-thing widget uib_w_14 d-margins lb-text text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="password">Password:</label>
+                        <input class="wide-control form-control default input-text" type="password" placeholder="Enter password" id="password">
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_7" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_39 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_40 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbacklogin"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_42 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btlogin">Login <i class="glyphicon glyphicon-arrow-right button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="signup-form">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_16" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_10_52">
+                    <div class="tarea widget uib_w_25 d-margins msg-text" data-uib="media/text" data-ver="0" name="uib_w_25" id="message-signup1">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="table-thing widget uib_w_22 s-margin lb-text text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="emailuser">Email:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="email@domain.com" id="emailuser">
+                    </div>
+                    <div class="table-thing widget uib_w_23 s-margin lb-text text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="mobileuser">Mobile:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="+1" id="mobileuser">
+                    </div>
+                    <div class="table-thing widget uib_w_24 s-margin lb-text text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="passworduser">Password:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="Minimum 6 characters" id="passworduser">
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_17" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_18 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_19 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="signup-back-1"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_21 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="signup-cont-1">Continue <i class="glyphicon glyphicon-arrow-right button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="srv-detail">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_72" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_57_23">
+                    <div class="tarea widget uib_w_81 d-margins round-corner" data-uib="media/text" data-ver="0" name="uib_w_81" id="serviceImg">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>serviceImg</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_78 d-margins round-corner input-font-18px" data-uib="media/text" data-ver="0" name="uib_w_78" id="serviceName">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>serviceName</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_79 d-margins round-corner input-font-18px" data-uib="media/text" data-ver="0" name="uib_w_79" id="serviceFare">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>serviceFare</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_80 d-margins round-corner input-font-18px" data-uib="media/text" data-ver="0" name="uib_w_80" id="serviceDescription">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>serviceDescription</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-pad urow uib_row_3 row-height-3" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_73" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_74 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_75 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbackdetail"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_77 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbooknow">Book Now <i class="el el-book button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="appointment-conf">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_83" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_20_48">
+                    <div class="tarea widget uib_w_97 d-margins" data-uib="media/text" data-ver="0" name="uib_w_97" id="message-conf">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+
+                    <div class="tarea widget uib_w_89 d-margins input-font-18px round-corner" data-uib="media/text" data-ver="0" name="uib_w_89" id="servName">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>servName</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_90 d-margins input-font-18px round-corner" data-uib="media/text" data-ver="0" name="uib_w_90" id="servDate">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>servDate</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_91 d-margins input-font-18px round-corner" data-uib="media/text" data-ver="0" name="uib_w_91" id="servTime">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+
+                        <div class="text-container">
+                            <p>servTime</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_93 d-margins input-font-18px round-corner" data-uib="media/text" data-ver="0" name="uib_w_93" id="servFare">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+
+                        <div class="text-container">
+                            <p>servFare</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_172 d-margins input-font-18px round-corner" data-uib="media/text" data-ver="0" name="uib_w_172" id="servAddress">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+
+                        <div class="text-container">
+                            <p>servAddress</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_173 d-margins round-corner input-font-18px" data-uib="media/text" data-ver="0" name="uib_w_173" id="servComments">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>servComments</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_92 round-corner" data-uib="media/text" data-ver="0" name="uib_w_92" id="servDetail">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container ellipsis" style="-webkit-line-clamp: 1;">
+                            <p>servDetail</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_94 d-margins" data-uib="media/text" data-ver="0" name="uib_w_94">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <h3><strong>Press Confirm to Pay&nbsp;</strong></h3>
+                        </div>
+                    </div>
+                    <div class="table-thing widget uib_w_95 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control" for="idservice"></label>
+                        <input class="wide-control form-control default input-text" type="hidden" id="idservice">
+                    </div>
+                    <div class="table-thing widget uib_w_96 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control" for="iduser"></label>
+                        <input class="wide-control form-control default input-text" type="hidden" id="iduser">
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_84" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_85 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_86 btback btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbackappconf"><i class="el el-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_88 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btconfirmbooking">Confirm <i class="fa fa-credit-card button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="pg-credit-card">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_98" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_73_18">
+                    <div class="tarea widget uib_w_101 d-margins" data-uib="media/text" data-ver="0" name="uib_w_101" id="message-card">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="table-thing widget uib_w_100 d-margins text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="cardholdername">Name:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="Name on card" id="cardholdername">
+                    </div>
+                    <div class="table-thing widget uib_w_102 d-margins text-input input-round-corner" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="cardnumber">Card Number::</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="Enter Card Number" id="cardnumber">
+                    </div>
+                    <div class="table-thing widget uib_w_103 d-margins input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Expiry Month:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="exp-month">
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+
+                    <div class="table-thing widget uib_w_104 d-margins input-round-corner" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Expiry Year:</label>
+                        <select class="wide-control form-control default input-text input-lg" style="font-size: 18pt;" id="exp-year">
+                            <option>2016</option>
+                            <option>2017</option>
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                            <option>2028</option>
+                            <option>2029</option>
+                            <option>2030</option>
+                            <option>2031</option>
+                            <option>2032</option>
+                            <option>2033</option>
+                            <option>2034</option>
+                            <option>2035</option>
+                            <option>2036</option>
+                            <option>2037</option>
+                            <option>2038</option>
+                            <option>2039</option>
+                            <option>2040</option>
+                        </select>
+                    </div>
+                    <div class="table-thing widget uib_w_105 d-margins input-round-corner text-input" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="cvv">CVV:</label>
+                        <input class="wide-control form-control default input-text" type="text" placeholder="Enter CVV" id="cvv">
+                    </div>
+                    <div class="table-thing widget uib_w_110 d-margins w-time" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="cardfare">Amount:</label>
+                        <input class="wide-control form-control default input-text input-lg" type="text" id="cardfare" disabled="">
+                    </div>
+                    <div class="table-thing widget uib_w_111 d-margins w-time" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="cardbid">Ref.#:</label>
+                        <input class="wide-control form-control default input-text" type="text" id="cardbid" disabled="">
+                    </div>
+
+                    <div class="grid grid-pad urow uib_row_4 row-height-4" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_4 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_99" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_106 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_107 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="btbackcard"><i class="el el-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_109 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btconfirmpay">Confirm <i class="fa fa-credit-card button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="signup-final">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_115" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_90_44">
+                    <div class="tarea widget uib_w_122 d-margins msg-text" data-uib="media/text" data-ver="0" name="uib_w_122" id="message-signup-3">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="tarea widget uib_w_121 d-margins" data-uib="media/text" data-ver="0" name="uib_w_121">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p><strong>You received text message for final account confirmation process.</strong>
+                            </p>
+
+                            <p><strong>Please follow the link inside the message to activate your account.</strong>
+                            </p>
+
+                            <p><strong>If you receive message and followed the link, clique Continue.</strong>
+                            </p>
+
+                            <p><strong>If you didn't receive the text message click on Re-send button bellow.</strong>
+                            </p>
+
+                            <p>&nbsp;</p>
+
+                            <p>&nbsp;</p>
+
+                            <p><strong>&nbsp;&nbsp;</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_116" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_117 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_118 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>Re-send</button>
+                            <button class="btn widget uib_w_120 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btsignupfinal">Continue <i class="glyphicon glyphicon-arrow-right button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="bookings">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_123" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_7_68">
+                    <div class="tarea widget uib_w_131 d-margins" data-uib="media/text" data-ver="0" name="uib_w_131" id="message-listbook">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="list-group widget uib_w_129 d-margins input-text" data-uib="twitter%20bootstrap/list_group" data-ver="1">
+                        <a class="list-group-item allow-badge widget uib_w_130" data-uib="twitter%20bootstrap/list_item" data-ver="1" id="listbook">
+
+                            <p class="list-group-item-text">List Booking</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_124" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_125 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_128 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1" id="bthistback"><i class="glyphicon glyphicon-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden stars-feed bgall" id="feedback">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_136" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_67_21">
+                    <div class="tarea widget uib_w_142 d-margins" data-uib="media/text" data-ver="0" name="uib_w_142" id="message-feed">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="tarea widget uib_w_143 d-margins" data-uib="media/text" data-ver="0" name="uib_w_143">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>Give STARS for the service:</p>
+                        </div>
+                    </div>
+                    <div class="txt-center">
+                        <div class="rating">
+                            <input id="star5" name="star" type="radio" value="5" onclick="saveStar('5')" class="radio-btn hide">
+                            <label for="star5">☆</label>
+                            <input id="star4" name="star" type="radio" value="4" onclick="saveStar('4')" class="radio-btn hide">
+                            <label for="star4">☆</label>
+                            <input id="star3" name="star" type="radio" value="3" onclick="saveStar('3')" class="radio-btn hide">
+                            <label for="star3">☆</label>
+                            <input id="star2" name="star" type="radio" value="2" onclick="saveStar('2')" class="radio-btn hide">
+                            <label for="star2">☆</label>
+                            <input id="star1" name="star" type="radio" value="1" onclick="saveStar('1')" class="radio-btn hide">
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div class="table-thing widget uib_w_144 d-margins" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                        <textarea rows="2" class="wide-control form-control" id="comment-feedback" wrap="soft" placeholder="Leave your comments here (optional)"></textarea>
+                    </div>
+                    <div class="table-thing widget uib_w_145 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control" for="idbooking"></label>
+                        <input class="wide-control form-control default" type="hidden" id="idbooking">
+                    </div>
+                    <div class="table-thing widget uib_w_145 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control" for="starselect"></label>
+                        <input class="wide-control form-control default" type="hidden" id="starselect">
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_137" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_138 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_139 btn-info btback" id="btbackfeed" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="el el-arrow-left button-icon-left" data-position="left"></i>Back</button>
+                            <button class="btn widget uib_w_141 btn-success" id="btsendfeed" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="fa fa-send button-icon-left" data-position="left"></i>Send</button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="contact">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_146" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_13_74">
+                    <div class="tarea widget uib_w_155 d-margins" data-uib="media/text" data-ver="0" name="uib_w_155">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p></p>
+                            <center>Contact Form</center>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_152 d-margins" data-uib="media/text" data-ver="0" name="uib_w_152" id="message-contact">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container"></div>
+                    </div>
+                    <div class="table-thing widget uib_w_153 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="subject">Subject</label>
+                        <input class="wide-control form-control default" type="text" id="subject">
+                    </div>
+                    <div class="table-thing widget uib_w_154 d-margins" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                        <label class="narrow-control label-top-left">Message</label>
+                        <textarea rows="2" class="wide-control form-control" wrap="soft" id="emailtext"></textarea>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_147" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_148 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_149 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="el el-arrow-left button-icon-left" data-position="left"></i>Back</button>
+
+                            <button class="btn widget uib_w_151 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btsendcontact"><i class="fa fa-send button-icon-left" data-position="left"></i>Send</button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden bgall" id="profile">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_156" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_72_5">
+                    <div class="tarea widget uib_w_162 d-margins" data-uib="media/text" data-ver="0" name="uib_w_162" id="profileName">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profilename</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_163 d-margins" data-uib="media/text" data-ver="0" name="uib_w_163" id="profileEmail">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileemail</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_164 d-margins" data-uib="media/text" data-ver="0" name="uib_w_164" id="profileMobile">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileMobile</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_165 d-margins" data-uib="media/text" data-ver="0" name="uib_w_165" id="profileAddress">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileAddress</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_166 d-margins" data-uib="media/text" data-ver="0" name="uib_w_166" id="profileGender">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileGender</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_167 d-margins" data-uib="media/text" data-ver="0" name="uib_w_167" id="profileHeight">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileHeight</p>
+                        </div>
+                    </div>
+                    <div class="tarea widget uib_w_168 d-margins" data-uib="media/text" data-ver="0" name="uib_w_168" id="profileWeight">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>profileWeight</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_157" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <div class="btn-group uib-bs-flex widget uib_w_158 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_159 btn-info btback" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="el el-arrow-left button-icon-left" data-position="left"></i>Back</button>
+
+                            <button class="btn widget uib_w_161 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="bteditprofile"><i class="fa fa-edit button-icon-left" data-position="left"></i>Edit</button>
+                        </div>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
